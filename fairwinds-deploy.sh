@@ -23,6 +23,6 @@ echo "aws_secret_access_key =" $(cat cred|grep SecretAccessKey|awk -F: '{print $
 
 echo "aws_access_key_id =" $(cat cred|grep AccessKeyId|awk -F: '{print $2}'|grep -o '".*"'|sed 's/"//g') >> ~/.aws/credentials
 
-chmod 500 ~/.aws/credentials ~/.aws/config
+chmod 600 ~/.aws/credentials ~/.aws/config
 
 python3 ~/fairwinds-tech/deployEC2.py

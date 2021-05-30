@@ -69,10 +69,14 @@ def deployContainer(hostname):
         client.connect(hostname=hostname, username="ubuntu", pkey=key)
 
         # Execute commands.  Install correct version of docker after connecting/ssh to the Ubuntu instance.
-	# Start container downloaded from dockerhub
 
         cmds = ["sudo apt update",
-                "sudo apt install -y docker.io",
+                "sudo apt install -y apt-transport-https ca-certificates curl software-properties-common",
+                "curl -fsSL https:\/\/download.docker.com\/linux/ubuntu/gpg | sudo apt-key add -",
+                "sudo add-apt-repository \"deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable\"",
+                "sudo apt update",
+                "apt-cache policy docker-ce",
+                "sudo apt install -y docker-ce",
                 "sudo docker run -d -p 8000:8000 danielcchen\/ec2_django"]
 
         # Commands above are executed here
